@@ -5770,12 +5770,15 @@
           var extension = url.split('.').pop();
 
           // supported extensions
-          var s = ( extension === 'mp4' || extension === 'webm' || extension === 'ogv' || extension === '3gp' || extension === 'mov' ) ? extension : null ;
+          var s = ( extension === 'mp4' || extension === 'webm' || extension === 'ogv' || extension === '3gp' || extension === 'mov' || extension === 'MOV' ) ? extension : null ;
           return s;
         },
         markup: function( url ) {
           // return '<video controls class="nGY2ViewerMedia"><source src="${id.src}" type="video/${id.type}" preload="auto">Your browser does not support the video tag (HTML 5).</video>';
           var extension = url.split('.').pop();
+          if (extension === 'mov' || extension === 'MOV') {
+            extension = 'mp4'
+          }
           return '<video controls class="nGY2ViewerMedia"><source src="'+ url +'" type="video/'+ extension +'" preload="auto">Your browser does not support the video tag (HTML 5).</video>';
         },
         kind: 'video',

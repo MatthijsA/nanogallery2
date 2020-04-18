@@ -110,12 +110,12 @@ module.exports = function(grunt) {
       'uglify:standardTargetGoogle3',
       'uglify:standardTargetFlickr',
       'uglify:standardTargetNanoPhotosProvider2',
-      'cssmin',
-      'gh-pages'
-      /* 'uglify:standardTarget',
-      'concat:minimalDebug',
-      'yuidoc',
-      'copy:redirects' */
+      'cssmin'
+        /*'gh-pages,'
+         'uglify:standardTarget',
+        'concat:minimalDebug',
+        'yuidoc',
+        'copy:redirects' */
     ]);
 }
       

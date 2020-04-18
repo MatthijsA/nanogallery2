@@ -11,7 +11,7 @@
   "keywords": "gallery galleries photo lightbox image album",
   "repository": {
     "type": "git",
-    "url": "git://github.com/nanostudio-org/nanogallery2.git"
+    "url": "git://github.com/MatthijsA/nanogallery2.git"
   },
   "bugs": {
     "url": "https://github.com/nanostudio-org/nanogallery2/issues"

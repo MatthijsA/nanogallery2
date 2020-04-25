@@ -8812,6 +8812,7 @@
           G.VOM.playSlideshowTimerID = window.setTimeout(function () {
               DisplayNextMedia(false);
           }, G.VOM.slideshowDelay);
+          return;
       }
 
       TriggerCustomEvent('lightboxNextImage');

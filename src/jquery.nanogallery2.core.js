@@ -5779,7 +5779,7 @@
           if (extension === 'mov' || extension === 'MOV') {
             extension = 'mp4'
           }
-          return '<video controls autoplay class="nGY2ViewerMedia"><source src="'+ url +'" type="video/'+ extension +'" preload="auto">Your browser does not support the video tag (HTML 5).</video>';
+          return '<video controls class="nGY2ViewerMedia"><source src="'+ url +'" type="video/'+ extension +'" preload="auto">Your browser does not support the video tag (HTML 5).</video>';
         },
         kind: 'video',
         selfhosted : true
@@ -8804,7 +8804,7 @@
     function DisplayNextMedia(isManual) {
       if( G.VOM.viewerMediaIsChanged
           || ((new Date().getTime()) - G.VOM.timeImgChanged < 300)
-          || (isManual && jQuery(".imgCurrent > video").get(0) !== undefined && (jQuery(".imgCurrent > video").get(0).ended !== false))
+          || (!!isManual && jQuery(".imgCurrent > video").get(0) !== undefined && (jQuery(".imgCurrent > video").get(0).ended !== false))
       ) {
         return;
       }

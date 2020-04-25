@@ -5779,7 +5779,7 @@
           if (extension === 'mov' || extension === 'MOV') {
             extension = 'mp4'
           }
-          return '<video controls class="nGY2ViewerMedia"><source src="'+ url +'" type="video/'+ extension +'" preload="auto">Your browser does not support the video tag (HTML 5).</video>';
+          return '<video controls autoplay class="nGY2ViewerMedia"><source src="'+ url +'" type="video/'+ extension +'" preload="auto">Your browser does not support the video tag (HTML 5).</video>';
         },
         kind: 'video',
         selfhosted : true
@@ -8263,7 +8263,7 @@
                 ViewerMediaPanX(0);
               }
               else {
-                ev.deltaX > 50 ? DisplayPreviousMedia() : DisplayNextMedia();
+                ev.deltaX > 50 ? DisplayPreviousMedia() : DisplayNextMedia(true);
               }
             }
           }
@@ -8290,7 +8290,7 @@
                   DisplayPreviousMedia();
                 }
                 else {
-                  DisplayNextMedia();
+                  DisplayNextMedia(true);
                 }
               }
             }
@@ -8351,7 +8351,7 @@
                   DisplayPreviousMedia();
                 }
                 else {
-                  DisplayNextMedia();
+                  DisplayNextMedia(true);
                 }
               }
             }
@@ -8419,7 +8419,7 @@
       switch( ngy2action ) {
         case 'next':
           StopPropagationPreventDefault(e);
-          DisplayNextMedia();
+          DisplayNextMedia(true);
           break;
         case 'previous':
           StopPropagationPreventDefault(e);
@@ -8634,7 +8634,7 @@
       }
       else {
         G.VOM.playSlideshow = true;
-        DisplayNextMedia();
+        DisplayNextMedia(true);
         G.VOM.$viewer.find('.playPauseButton').html(G.O.icons.viewerPause);
       }
     }
@@ -8801,8 +8801,13 @@
     }
     
     // Display next image
-    function DisplayNextMedia() {
-      if( G.VOM.viewerMediaIsChanged || ((new Date().getTime()) - G.VOM.timeImgChanged < 300) ) { return; }
+    function DisplayNextMedia(isManual) {
+      if( G.VOM.viewerMediaIsChanged
+          || ((new Date().getTime()) - G.VOM.timeImgChanged < 300)
+          || (isManual && jQuery(".imgCurrent > video").get(0) !== undefined && (jQuery(".imgCurrent > video").get(0).ended !== false))
+      ) {
+        return;
+      }
       
       TriggerCustomEvent('lightboxNextImage');
       DisplayInternalViewer(G.VOM.IdxNext(), 'nextImage');
@@ -9554,7 +9559,7 @@
               case 38:    // UP
               case 39:    // RIGHT
               case 33:    // PAGE UP
-                DisplayNextMedia();
+                DisplayNextMedia(true);
                 break;
               case 37:    // LEFT
               case 34:    // PAGE DOWN

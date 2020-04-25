@@ -8804,11 +8804,16 @@
     function DisplayNextMedia(isManual) {
       if( G.VOM.viewerMediaIsChanged
           || ((new Date().getTime()) - G.VOM.timeImgChanged < 300)
-          || (!isManual && jQuery(".imgCurrent > video").get(0) !== undefined && (jQuery(".imgCurrent > video").get(0).ended === false))
       ) {
         return;
       }
-      
+
+      if(!isManual && jQuery(".imgCurrent > video").get(0) !== undefined && (jQuery(".imgCurrent > video").get(0).ended === false)) {
+          G.VOM.playSlideshowTimerID = window.setTimeout(function () {
+              DisplayNextMedia(false);
+          }, G.VOM.slideshowDelay);
+      }
+
       TriggerCustomEvent('lightboxNextImage');
       DisplayInternalViewer(G.VOM.IdxNext(), 'nextImage');
     };

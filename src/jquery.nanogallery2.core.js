@@ -5927,15 +5927,6 @@
             newItem.mediaKind = media.kind;
             newItem.mediaMarkup = (media.selfhosted) ? media.markup(src) : media.markup(id);
 
-            if (jQuery(newItem.mediaMarkup).is("video")) {
-              jQuery(newItem.mediaMarkup).onclick = function () {
-                if (ngscreenfull.enabled && jQuery(".imgCurrent > video").get(0) !== undefined) {
-                  ngscreenfull.request(jQuery(".imgCurrent > video").get(0));
-                }
-                // prevent pausing/playing when clicking on video
-                return false;
-              };
-            }
             return false;
           }
         });

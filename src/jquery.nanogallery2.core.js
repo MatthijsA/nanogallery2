@@ -9069,8 +9069,11 @@
       G.VOM.viewerMediaIsChanged = false;
       TriggerCustomEvent('lightboxImageDisplayed');
 
-      // if a video is displayed, start playing it
+      // if a video is displayed, start playing it fullscreen
       if (jQuery(".imgCurrent > video").get(0) !== undefined) {
+        if (ngscreenfull.enabled && G.O.viewerIsFullscreen) {
+            ngscreenfull.request();
+        }
         jQuery(".imgCurrent > video").get(0).play();
       }
     }

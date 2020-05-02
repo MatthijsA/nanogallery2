@@ -5928,7 +5928,7 @@
             newItem.mediaMarkup = (media.selfhosted) ? media.markup(src) : media.markup(id);
 
             if (jQuery(newItem.mediaMarkup).is("video")) {
-              jQuery("video").onclick = function () {
+              jQuery(newItem.mediaMarkup).onclick = function () {
                 if (ngscreenfull.enabled && jQuery(".imgCurrent > video").get(0) !== undefined) {
                   ngscreenfull.request(jQuery(".imgCurrent > video").get(0));
                 }

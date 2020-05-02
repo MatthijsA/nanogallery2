@@ -8808,6 +8808,7 @@
         return;
       }
 
+      // check if a video is being showed, and if it is if it has already ended. In that case pause slideshow until it has eded
       if(!isManual && jQuery(".imgCurrent > video").get(0) !== undefined && (jQuery(".imgCurrent > video").get(0).ended === false)) {
           G.VOM.playSlideshowTimerID = window.setTimeout(function () {
               DisplayNextMedia(false);
@@ -9067,7 +9068,11 @@
 
       G.VOM.viewerMediaIsChanged = false;
       TriggerCustomEvent('lightboxImageDisplayed');
-      
+
+      // if a video is displayed, start playing it
+      if (jQuery(".imgCurrent > video").get(0) !== undefined) {
+        jQuery(".imgCurrent > video").get(0).play();
+      }
     }
 
     

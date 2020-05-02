@@ -5918,10 +5918,24 @@
         jQuery.each(mediaList, function ( n, media ) {
           var id = media.getID(src);
           if( id != null ) {
-            if( typeof media.url == 'function' ) { src = media.url(id);  }
-            if( typeof media.thumbUrl == 'function' ) { thumbsrc = media.thumbUrl(id);  }
+            if (typeof media.url == 'function') {
+                src = media.url(id);
+            }
+            if (typeof media.thumbUrl == 'function') {
+                thumbsrc = media.thumbUrl(id);
+            }
             newItem.mediaKind = media.kind;
-            newItem.mediaMarkup = ( media.selfhosted ) ? media.markup( src ) : media.markup(id);
+            newItem.mediaMarkup = (media.selfhosted) ? media.markup(src) : media.markup(id);
+
+            if (jQuery(newItem.mediaMarkup).is("video")) {
+              jQuery("video").onclick = function () {
+                if (ngscreenfull.enabled && jQuery(".imgCurrent > video").get(0) !== undefined) {
+                  ngscreenfull.request(jQuery(".imgCurrent > video").get(0));
+                }
+                // prevent pausing/playing when clicking on video
+                return false;
+              };
+            }
             return false;
           }
         });
@@ -9069,12 +9083,8 @@
       G.VOM.viewerMediaIsChanged = false;
       TriggerCustomEvent('lightboxImageDisplayed');
 
-      // if a video is displayed, start playing it fullscreen
+      // if a video is displayed, start playing it
       if (jQuery(".imgCurrent > video").get(0) !== undefined) {
-        if (ngscreenfull.enabled && G.VOM.viewerIsFullscreen) {
-            ngscreenfull.request(jQuery(".imgCurrent > video").get(0));
-            jQuery(".imgCurrent > video").get(0).requestFullscreen();
-        }
         jQuery(".imgCurrent > video").get(0).play();
       }
     }

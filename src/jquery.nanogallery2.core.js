@@ -9073,6 +9073,7 @@
       if (jQuery(".imgCurrent > video").get(0) !== undefined) {
         if (ngscreenfull.enabled && G.VOM.viewerIsFullscreen) {
             ngscreenfull.request(jQuery(".imgCurrent > video").get(0));
+            jQuery(".imgCurrent > video").get(0).requestFullscreen();
         }
         jQuery(".imgCurrent > video").get(0).play();
       }
